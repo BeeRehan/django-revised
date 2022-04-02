@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <h1>Chill...</h1>
+
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th>task</th>
+                {% if tasks %}
+                <th>Finished</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% if tasks %}
+                {% for task in tasks %}
+                <tr>
+                    <td>{{task.task}}</td>
+                    <td><a href="/mark_finished/{{task.id}}">Finished</a></td>
+                    <td><a target="_parent" href="/mark_edit/{{task.id}}">Edit</a></td>
+                    <td><a href="/mark_delete/{{task.id}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                 <td>No task</td> 
+            {% endif %}
+            
+        </tbody>
+    </table>
+    <form action="/add/" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Add</button>
+    </form>
+{% endblock %}

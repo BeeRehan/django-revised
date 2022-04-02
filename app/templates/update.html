@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block container %}
+<form action="/mark_edit/{{pk}}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Add</button>
+</form>
+{% endblock %}
